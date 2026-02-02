@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anantharaman Durairaju | Senior Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --bg-dark:#050b24;
+    --bg-card:rgba(255,255,255,0.06);
+    --accent:#4fa3ff;
+    --accent-soft:#9cc3ff;
+}
+
+*{box-sizing:border-box;}
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:radial-gradient(circle at top, #0b2a66, #050b24);
+    color:#fff;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:50px 25px;
+}
+
+/* ---------- HERO ---------- */
+.hero{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:40px;
+    align-items:center;
+    margin-bottom:70px;
+}
+
+.profile-pic{
+    width:240px;
+    height:240px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#4fa3ff,#9cc3ff);
+    padding:6px;
+}
+
+.profile-pic img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin:0;
+}
+
+.hero h2{
+    font-weight:400;
+    color:var(--accent-soft);
+    margin-top:10px;
+}
+
+.hero p{
+    max-width:650px;
+    margin-top:20px;
+}
+
+/* ---------- SECTION ---------- */
+section{
+    margin-bottom:60px;
+}
+
+section h3{
+    font-size:1.6rem;
+    margin-bottom:25px;
+    position:relative;
+}
+
+section h3::after{
+    content:"";
+    width:70px;
+    height:3px;
+    background:var(--accent);
+    position:absolute;
+    bottom:-8px;
+    left:0;
+}
+
+.card{
+    background:var(--bg-card);
+    padding:25px;
+    border-radius:16px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+}
+
+.grid-2{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+ul{padding-left:20px;}
+li{margin-bottom:10px;}
+
+/* ---------- LINKS ---------- */
+a{color:var(--accent-soft);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ---------- FOOTER ---------- */
+footer{
+    text-align:center;
+    opacity:0.7;
+    margin-top:80px;
+}
+
+@media(max-width:768px){
+    .hero{grid-template-columns:1fr;text-align:center;}
+    .profile-pic{margin:auto;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+    <div class="profile-pic">
+        <!-- Replace profile.jpg with your photo file -->
+        <img src="profile.jpg" alt="Profile Photo">
+    </div>
+    <div>
+        <h1>Anantharaman Durairaju</h1>
+        <h2>Senior Software Engineer (SRE | Cloud Engineering | QA Automation)</h2>
+        <p>Cumming, GA, USA</p>
+        <p>Senior Software Engineer with 20+ years of experience delivering scalable, secure, and highly reliable cloud-native solutions. Specialized in Site Reliability Engineering, Observability, Automation, and Cloud Engineering.</p>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section>
+<h3>About Me</h3>
+<div class="card">
+<p>Expert in translating business requirements into resilient cloud solutions, driving reliability maturity, building automation frameworks, and embedding SRE best practices across the SDLC.</p>
+</div>
+</section>
+
+<!-- EDUCATION -->
+<section>
+<h3>Education</h3>
+<div class="card">
+<ul>
+<li>M.C.A (Master of Computer Application) – SASTRA University, India</li>
+</ul>
+</div>
+</section>
+
+<!-- WORK HISTORY -->
+<section>
+<h3>Work History</h3>
+<div class="card">
+<ul>
+<li>Senior Software Engineer – Macy's Technology (Current)</li>
+<li>Technical Test Lead – Apple Inc (via Infosys)</li>
+<li>Assistant Project Manager – Zylog Systems Ltd</li>
+<li>Programmer Analyst – Cognizant Technology Solutions</li>
+<li>Test Engineer – Forte Solutions Pvt. Ltd</li>
+</ul>
+</div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+<h3>Projects</h3>
+<div class="card">
+<ul>
+<li>Macy's / Bloomingdale's – Site Reliability Engineering</li>
+<li>Macy's Digital Support, Preview & Automation</li>
+<li>Apple Concierge, Radar, DreamCatcher, iLog</li>
+<li>Field Power (WFMS) – Zylog Systems</li>
+<li>Mobile Banking – Bank Muscat</li>
+<li>CalWIN – Public Assistance System</li>
+</ul>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section>
+<h3>Skill Set</h3>
+<div class="grid-2">
+<div class="card"><h4>Programming</h4><p>Java, JavaScript, Python, SQL</p></div>
+<div class="card"><h4>Cloud</h4><p>AWS, Azure, Google Cloud Platform</p></div>
+<div class="card"><h4>Observability</h4><p>Dynatrace, Splunk, FullStory, Firebase, Google Monitoring</p></div>
+<div class="card"><h4>DevOps & Automation</h4><p>Terraform, Ansible, Jenkins, Kubernetes</p></div>
+<div class="card"><h4>Testing</h4><p>Selenium, Appium, Playwright, Cucumber, TestNG, JUnit</p></div>
+<div class="card"><h4>Databases</h4><p>MySQL, Oracle, SQL Server, MongoDB, DB2, Spanner</p></div>
+</div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section>
+<h3>Certifications</h3>
+<div class="card">
+<ul>
+<li>Google Cloud – Professional Cloud Architect</li>
+<li>LinkedIn – Site Reliability Engineering Essential Training</li>
+<li>LSU – Introduction to DevOps</li>
+<li>IBM Certified Solution Designer – RFT for Java</li>
+</ul>
+</div>
+</section>
+
+<!-- AWARDS -->
+<section>
+<h3>Awards</h3>
+<div class="card">
+<ul>
+<li>Multiple client and internal recognition awards for automation excellence and delivery leadership</li>
+</ul>
+</div>
+</section>
+
+<!-- CONNECT -->
+<section>
+<h3>Connect With Me</h3>
+<div class="card">
+<ul>
+<li>LinkedIn: <a href="https://www.linkedin.com" target="_blank">https://www.linkedin.com</a></li>
+<li>Email: <a href="mailto:ananthusworld@gmail.com">ananthusworld@gmail.com</a></li>
+<li>Phone: (415) 629-6149</li>
+<li>GitHub: <a href="https://github.com" target="_blank">https://github.com</a></li>
+</ul>
+</div>
+</section>
+
+<footer>
+<p>© 2026 Anantharaman Durairaju USA</p>
+</footer>
+
+</div>
+</body>
+</html>
