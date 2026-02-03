@@ -100,7 +100,7 @@ html{
   }
 
   .nav-links.active{
-    max-height:500px;
+    max-height:100vh;
   }
 
   .nav-links li{
@@ -176,23 +176,6 @@ footer{text-align:center;opacity:0.7;margin-top:80px;}
 }
 </style>
 </head>
-<script>
-const menu = document.getElementById("mobile-menu");
-const links = document.getElementById("nav-links");
-
-menu.addEventListener("click", () => {
-  links.classList.toggle("active");
-});
-
-/* Close menu after click */
-document.querySelectorAll(".nav-links a")
-  .forEach(link => {
-    link.addEventListener("click", () => {
-      links.classList.remove("active");
-    });
-  });
-</script>
-
   
 <body>
 <!-- NAVBAR -->
@@ -346,6 +329,22 @@ document.querySelectorAll(".nav-links a")
 <script>
 ScrollReveal().reveal('section',{delay:200,distance:'40px',origin:'bottom'});
 ScrollReveal().reveal('.hero',{delay:200});
+</script>
+
+<script>
+const menu = document.getElementById("mobile-menu");
+const links = document.getElementById("nav-links");
+
+menu.addEventListener("click", () => {
+  links.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-links a")
+  .forEach(link => {
+    link.addEventListener("click", () => {
+      links.classList.remove("active");
+    });
+  });
 </script>
 </body>
 </html>
