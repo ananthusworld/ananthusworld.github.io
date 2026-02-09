@@ -1,513 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Reliability Engineering (SRE)</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://unpkg.com/scrollreveal"></script>
-<style>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Reliability Engineering (SRE)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+      :root {
+        --bg: #050b24;
+        --card: rgba(255, 255, 255, 0.07);
+        --accent: #4fa3ff;
+        --soft: #9cc3ff;
+      }
 
-:root{
-  --bg:#050b24;
-  --card:rgba(255,255,255,0.07);
-  --accent:#4fa3ff;
-  --soft:#9cc3ff;
-}
+      .hero-container {
+        width: 100%;
+        max-width: 1800px;
+        margin: auto;
+        padding: 10px;
+      }
 
-.hero-container {
-      width: 100%;
-      max-width: 1800px;
-      margin: auto;
-      padding: 10px;
-    }
+      .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        object-fit: cover;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
 
-.hero-image {
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
-      object-fit: cover;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle at top, #0b2a66, #050b24);
+        color: #fff;
+      }
 
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:radial-gradient(circle at top,#0b2a66,#050b24);
-  color:#fff;
-}
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 120px 25px 60px;
+      }
 
-.container{max-width:1200px;margin:auto;padding:120px 25px 60px;}
+      html {
+        scroll-behavior: smooth;
+      }
 
-html{
-  scroll-behavior:smooth;
-}
+      /* NAVBAR */
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(5, 11, 36, 0.95);
+        z-index: 9999;
+      }
 
-/* NAVBAR */
-.navbar{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:rgba(5,11,36,0.95);
-  z-index:9999;
-}
+      .nav-container {
+        max-width: 1800px;
+        margin: auto;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-.nav-container{
-  max-width:1800px;
-  margin:auto;
-  padding:15px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+      .logo {
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
 
-.logo{
-  color:#fff;
-  font-weight:600;
-  font-size:1.2rem;
-}
+      /* Desktop Menu */
+      .nav-links {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        gap: 25px;
+      }
 
-/* Desktop Menu */
-.nav-links{
-  list-style:none;
-  display:flex;
-  justify-content:flex-end;
-  gap:25px;
-}
+      .nav-links li a {
+        color: #fff;
+        text-decoration: none;
+      }
 
-.nav-links li a{
-  color:#fff;
-  text-decoration:none;
-}
+      /* Hamburger Icon */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
 
-/* Hamburger Icon */
-.menu-toggle{
-  display:none;
-  flex-direction:column;
-  cursor:pointer;
-}
+      .menu-toggle span {
+        height: 3px;
+        width: 26px;
+        background: #fff;
+        margin: 4px 0;
+        border-radius: 3px;
+      }
 
-.menu-toggle span{
-  height:3px;
-  width:26px;
-  background:#fff;
-  margin:4px 0;
-  border-radius:3px;
-}
+      /* MOBILE VIEW */
+      @media (max-width:768px) {
+        .menu-toggle {
+          display: flex;
+        }
 
-/* MOBILE VIEW */
-@media (max-width:768px){
+        /* SIDE DRAWER MENU */
+        /* FLOATING MENU CARD */
+        .nav-links {
+          position: fixed;
+          top: 70px;
+          /* below navbar */
+          right: -60%;
+          width: 50%;
+          background: #050b24;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 20px 20px;
+          border-radius: 16px;
+          box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+          transition: right .3s ease;
+        }
 
-  .menu-toggle{
-    display:flex;
-  }
+        .nav-links.active {
+          right: 15px;
+        }
 
-  /* SIDE DRAWER MENU */
-/* FLOATING MENU CARD */
-.nav-links{
-  position:fixed;
-  top:70px;              /* below navbar */
-  right:-60%;
-  width:50%;
-  background:#050b24;
-  flex-direction:column;
-  align-items:flex-start;
-  padding:20px 20px;
-  border-radius:16px;
-  box-shadow:0 0 30px rgba(0,0,0,0.6);
-  transition:right .3s ease;
-}
+        .nav-links li {
+          padding: 8px 0;
+          width: 100%;
+        }
 
-.nav-links.active{
-  right:15px;
-}
+        .nav-links li a {
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
 
-  .nav-links li{
-    padding:8px 0;
-    width:100%;
-  }
+        .nav-links li {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-  .nav-links li a{
-    font-size:0.9rem;
-    font-weight:500;
-  }
-  
-  .nav-links li{
-  border-bottom:1px solid rgba(255,255,255,0.08);
-}
+        .nav-links li:last-child {
+          border-bottom: none;
+        }
+      }
 
-.nav-links li:last-child{
-  border-bottom:none;
-}
-}
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 9000;
+      }
 
-.menu-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.5);
-  display:none;
-  z-index:9000;
-}
+      .menu-overlay.active {
+        display: block;
+      }
 
-.menu-overlay.active{
-  display:block;
-}
+      /* HERO */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 50px;
+        align-items: center;
+        margin-bottom: 80px;
+      }
 
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 2fr;gap:50px;align-items:center;margin-bottom:80px;}
+      .profile-wrap {
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4fa3ff, #9cc3ff);
+        padding: 6px;
+        box-shadow: 0 0 40px rgba(79, 163, 255, 0.6);
+      }
 
-.profile-wrap{
-  width:260px;height:260px;border-radius:50%;
-  background:linear-gradient(135deg,#4fa3ff,#9cc3ff);
-  padding:6px;box-shadow:0 0 40px rgba(79,163,255,0.6);
-}
-.profile-wrap img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
+      .profile-wrap img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
 
-.btn{
-  display:inline-block;margin-top:20px;padding:12px 28px;
-  background:linear-gradient(135deg,#4fa3ff,#9cc3ff);
-  color:#000;border-radius:30px;font-weight:600;
-}
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 28px;
+        background: linear-gradient(135deg, #4fa3ff, #9cc3ff);
+        color: #000;
+        border-radius: 30px;
+        font-weight: 600;
+      }
 
-section{margin-bottom:25px;}
-section h3{
-  font-size:1.7rem;
-  margin-bottom:25px;
-  position:relative;
-  display:inline-block;   /* IMPORTANT */
-  padding-bottom:8px;
-}
+      section {
+        margin-bottom: 25px;
+      }
 
-section h3::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:0;
-  width:100%;             /* Matches text width */
-  height:3px;
-  background:var(--accent);
-}
-.card{
-  background:var(--card);
-  padding:28px;border-radius:18px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.4);
-}
+      section h3 {
+        font-size: 1.7rem;
+        margin-bottom: 25px;
+        position: relative;
+        display: inline-block;
+        /* IMPORTANT */
+        padding-bottom: 8px;
+      }
 
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;}
+      section h3::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        /* Matches text width */
+        height: 3px;
+        background: var(--accent);
+      }
 
-/* WORK HISTORY */
-.work-item{display:flex;gap:20px;align-items:center;margin-bottom:20px;}
-.logo-img{width:60px;height:60px;border-radius:50%;object-fit:contain;background:#fff;padding:5px;}
+      .card {
+        background: var(--card);
+        padding: 28px;
+        border-radius: 18px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      }
 
-/* CONNECT */
-.tile{
-  background:var(--card);
-  padding:22px;border-radius:16px;text-align:center;
-  transition:transform .3s, box-shadow .3s;
-}
-.tile:hover{transform:translateY(-8px);box-shadow:0 0 20px var(--accent);} 
-.tile i{font-size:1.8rem;color:var(--soft);margin-bottom:10px;display:block;}
-.tile a{color:#fff;text-decoration:none;}
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+      }
 
-footer{text-align:center;opacity:0.7;margin-top:80px;}
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 25px;
+      }
 
-@media(max-width:768px){
-.hero{grid-template-columns:1fr;text-align:center;}
-.profile-wrap{margin:auto;}
-}
-</style>
-</head>
-  
-<body>
-<!-- NAVBAR -->
+      /* WORK HISTORY */
+      .work-item {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
 
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="logo">Site Reliability Engineering </div>
+      .logo-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: contain;
+        background: #fff;
+        padding: 5px;
+      }
 
-    <div class="menu-toggle" id="mobile-menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      /* CONNECT */
+      .tile {
+        background: var(--card);
+        padding: 22px;
+        border-radius: 16px;
+        text-align: center;
+        transition: transform .3s, box-shadow .3s;
+      }
+
+      .tile:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 0 20px var(--accent);
+      }
+
+      .tile i {
+        font-size: 1.8rem;
+        color: var(--soft);
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      .tile a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      footer {
+        text-align: center;
+        opacity: 0.7;
+        margin-top: 80px;
+      }
+
+      @media(max-width:768px) {
+        .hero {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .profile-wrap {
+          margin: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">Site Reliability Engineering </div>
+        <div class="menu-toggle" id="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li>
+            <a href="#sre">SRE</a>
+          </li>
+          <li>
+            <a href="#mobileAppSre">Mobile SRE</a>
+          </li>
+          <li>
+            <a href="#blogs">Blogs</a>
+          </li>
+          <li>
+            <a href="#profile">Profile</a>
+          </li>
+          <li>
+            <a href="#about">About Me</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="menu-overlay" id="overlay"></div>
+    <section class="hero"></section>
+    <div class="hero-container">
+      <img src="hero.png" alt="Site Reliability Engineering" class="hero-image" />
     </div>
-
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#sre">SRE</a></li>
-      <li><a href="#mobileAppSre">Mobile SRE</a></li>
-      <li><a href="#blogs">Blogs</a></li>
-      <li><a href="#profile">Profile</a></li>
-      <li><a href="#about">About Me</a></li>
-    </ul>
-  </div>
-</nav>
-
-<div class="menu-overlay" id="overlay"></div>
-<section class="hero"> </section>
-
-<div class="hero-container">
-    <img 
-      src="hero.png" 
-      alt="Site Reliability Engineering"
-      class="hero-image"
-    />
-  </div>
-
-<section id="profileSummary">
-<div class="card">
-
-<!-- SRE-->
-<section id="sre">
-<h3>What is SRE?</h3>
-<div class="card">
-<h2>Site Reliability Engineering (SRE)</h2>
-<p>If you’ve ever wondered why some apps never seem to crash while others fail at the worst possible moment, the answer often comes down to one thing: <b>Site Reliability Engineering (SRE)</b></p>
-<b>What Is SRE, Really?</b>
-<p>Site Reliability Engineering (SRE) is a way of making sure websites, apps, and online systems work reliably, consistently, and smoothly — even under pressure.</p>
-<p>In simple words: <b>SRE is about keeping systems running without surprises.</b></p>
-<p>Whether it’s a banking app, an e-commerce website, or a video streaming platform, SRE helps ensure:</p>
-<ul>
-<li>The app loads fast</li>
-<li>Features work as expected</li>
-<li>Downtime is rare</li>
-<li>Problems are fixed quickly when they happen</li>
-</ul>
-
-
-<b>A Simple Real-Life Example</b>
-<p>Imagine you run a food delivery app.</p>
-<p>Users expect:</p>
-<ul>
-<li>The app to open instantly</li>
-<li>⁠Payments to never fail</li>
-<li>Orders to go through smoothly</li>
-<li>The service to work 24/7</li>
-</ul>
-
-<p>Now imagine the app crashes on a busy weekend evening 😬 Orders fail. Users get angry. The business loses money. 👉 This is where SRE comes in.</p>
-<p>SREs work behind the scenes to prevent crashes, detect issues early, and recover fast when something goes wrong.</p>
-
-
-<b>Who Are Site Reliability Engineers?</b>
-<p>Site Reliability Engineers are software engineers focused on reliability. They don’t just build features — they make sure those features:</p>
-<ul>
-<li>Stay available</li>
-<li>Scale under heavy traffic</li>
-<li>Don’t break unexpectedly</li>
-</ul>
-
-<p>You can think of them as:</p>
-<ul>
-<li>🧑 Doctors for systems</li>
-<li>🚦 Traffic controllers for digital services</li>
-<li>🧯 Firefighters for production issues</li>
-</ul>
-</div>
-</section>
-
-<!-- SRE for Mobile Apps -->
-<section id="mobileAppSre">
-<h3>Mobile SRE</h3>
-<div class="card">
-<h2>Site Reliability Engineering (SRE) for Mobile Native Applications</h2>
-<b>Building Reliable, Scalable, and Observable Mobile Experiences on Google Cloud</b>
-<p>Mobile applications today are mission-critical business platforms. For retail, e-commerce, and fintech companies, the mobile app is often the primary revenue channel. A one-second slowdown in checkout, a spike in crashes, or an authentication outage can directly translate into lost revenue and damaged customer trust.</p>
-<p>Site Reliability Engineering (SRE) brings software engineering rigor to operations, ensuring that mobile platforms are reliable, fast, and resilient—even during extreme traffic spikes like Black Friday sales or payroll deposit days.</p>
-<p>This article explores how SRE principles apply specifically to Mobile Native Apps (iOS & Android), including:</p>
-<ul>
-<li>Reliability architecture on Google Cloud</li>
-<li>Mobile observability using Firebase</li>
-<li>Crash and UI performance management</li>
-<li>User adoption and funnel monitoring</li>
-<li>Real-world retail, e-commerce, and fintech case studies</li>
-</ul>
-<b>Why Mobile SRE Is Different</b>
-
-<p>Traditional SRE focuses heavily on backend systems. Mobile SRE expands that scope to include:</p>
-<ul>
-<li>Unreliable networks</li>
-<li>Device fragmentation</li>
-<li>OS upgrades</li>
-<li>App store rollout delays</li>
-<li>Client-side crashes</li>
-</ul>
-<p>Mobile SRE must treat the mobile app as a first-class production system, not just a client.</p>
-
-<b>Core SRE Goals for Mobile Apps</b>
-<p>Mobile reliability can be framed around four pillars:</p>
-<ul>
-<li>Availability – App and APIs are reachable</li>
-<li>Performance – Fast startup and smooth navigation</li>
-<li>Stability – Low crash & ANR rates</li>
-<li>Scalability – Handle large spikes gracefully</li>
-</ul>
-</div>
-</section>
-
-
-<!-- Blogs -->
-<section id="blogs">
-<h3>Blogs</h3>
-<div class="grid-2">
-<div class="card"><h4>Google Cloud Blogs</h4><p>News, tips, and inspiration to accelerate your digital transformation</p><a href="https://cloud.google.com/blog" target="_blank" rel="noopener noreferrer">Read More -></a></div>
-<div class="card"><h4>Google Cloud APIs</h4><p>A full directory of every API you can call from your mobile app.</p><a href="https://cloud.google.com/apis" target="_blank" rel="noopener noreferrer">Read More -></a></div>
-<div class="card"><h4>Firebase Components</h4><p>Pre-built UI blocks for authentication and data handling to speed up your development.</p><a href="https://developers.google.com/products?text=firebase" target="_blank" rel="noopener noreferrer">Read More -></a></div>
-<div class="card"><h4>Google Cloud Cost Management</h4><p>Explore costs and usage management in Google Cloud Platform.</p><a href="https://docs.cloud.google.com/docs/costs-usage" target="_blank" rel="noopener noreferrer">Read More -></a></div>
-<div class="card"><h4>Google Cloud Codelabs</h4><p>Google Developers Codelabs provide a guided, tutorial, hands-on coding experience to help you learn how to build applications using Google Cloud Platform.</p><a href="https://codelabs.developers.google.com" target="_blank" rel="noopener noreferrer">Read More -></a></div>
-</div>
-</section>
-
-
-
-<section id="profile">
-<h3>Profile</h3>
-<div class="card">
-<div class="hero">
-<div class="profile-wrap">
-<img src="profile.jpg" alt="Profile">
-</div>
-<div>
-<h1>Anantharaman Durairaju</h1>
-<h4>Senior Software Engineer - SRE | Cloud | Test Automation @ Macy’s Tech</h4>
-<p>Senior Software Engineer with 20+ years of experience delivering scalable, secure, and highly reliable cloud-native solutions. Specialized in Site Reliability Engineering, Observability, Automation, and Cloud Engineering.</p>
-<div style="display:flex; justify-content:center;">
-<a class="btn" href="resume.pdf" target="_blank" rel="noopener noreferrer" download>Download Resume</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-
-<!-- WORK HISTORY -->
-<section id="work">
-<h3>Work History</h3>
-<div class="card">
-<div class="work-item"><img src="macys.jpg" class="logo-img"><div><b>Macy's Technology</b> – Senior Software Engineer (Present)</div></div>
-<div class="work-item"><img src="apple.jpg" class="logo-img"><div><b>Infosys / Apple Inc</b> – Technical Test Lead</div></div>
-<div class="work-item"><img src="zylog.jpg" class="logo-img"><div><b>Zylog Systems</b> – Assistant Project Manager</div></div>
-<div class="work-item"><img src="cognizant.jpg" class="logo-img"><div><b>Cognizant</b> – Programmer Analyst</div></div>
-</div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-<h3>Projects</h3>
-<div class="card">
-<ul>
-<li><b>Macy's / Bloomingdale's SRE</b> – Driving SLOs, observability, and automation for high-revenue eCommerce platforms.</li>
-<li><b>Macy's / Bloomingdale's Digital Test Automation</b> – Built scalable automation frameworks for web, mobile, and APIs.</li>
-<li><b>Apple Concierge & Radar</b> – Designed enterprise automation frameworks for internal Apple apps.</li>
-<li><b>Zylog Systems Field Power (WFMS)</b> – Enables the user to schedule and track work order information of Field Engineers</li>
-<li><b>Bank Muscat Mobile Banking</b> – Initiative is aimed at providing customers seamless connectivity to the Bank through Mobile Banking</li>
-<li><b>California CalWIN</b> – It is an on-line, real-time system that supports all the major processing functions necessary to administer California’s public assistance programs</li>
-</ul>
-</div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-<h3>Skill Set</h3>
-<div class="grid-2">
-<div class="card"><h4>Cloud</h4><p>AWS, Azure, Google Cloud Platform</p></div>
-<div class="card"><h4>Observability</h4><p>Dynatrace, Splunk, FullStory, Firebase, Google Monitoring</p></div>
-<div class="card"><h4>Incident Mgt & Alerting</h4><p>StatusPage, Moogsoft, Google Alert, Splunk, SentinalOne</p></div>
-<div class="card"><h4>DevOps</h4><p>Terraform, Ansible, Jenkins, Kubernetes</p></div>
-<div class="card"><h4>Programming</h4><p>Java, JavaScript, Python, SQL</p></div>
-<div class="card"><h4>Test Automation</h4><p>Selenium, Appium, Playwright, Cucumber, TestNG, JUnit</p></div>
-<div class="card"><h4>Databases</h4><p>MySQL, Oracle, SQL Server, MongoDB, DB2, Spanner</p></div>
-<div class="card"><h4>Data Visualization Tools</h4><p>Tableau, Power BI, Looker Studio</p></div>
-</div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-<h3>Education</h3>
-<div class="card">
-<ul>
-<li>Master of Computer Application (MCA) – SASTRA University, India</li>
-<li>Bachelor of Science (BSc) in Computer Science – Bharathidasan University, India</li>
-</ul>
-</div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-<h3>Certifications</h3>
-<div class="card">
-<ul>
-<li>Google Cloud – Professional Cloud Architect</li>
-<li>LinkedIn – Site Reliability Engineering Essential Training</li>
-<li>LSU – Introduction to DevOps</li>
-<li>IBM Certified Solution Designer – RFT for Java</li>
-</ul>
-</div>
-</section>
-
-<!-- AWARDS -->
-<section id="awards">
-<h3>Awards</h3>
-<div class="card">
-<ul>
-<li><b>Bright Spot Award - 2025</b> issued by Macys Tech - Played leadership role for Mobile App (iOS and Android) platforms and for driving a successful holiday period
-<li><b>Bright Spot Award - 2023</b> issued by Macys Tech - Implemented order funnel automation test in production for macys.com & bloomingdales.com
-<li><b>Bright Spot Award - 2018</b> issued by Macys Tech - Built the web security & vulnerability automated suite
-<li><b>You are matter to us Award</b> issued by Infosys - Consistent high-quality test automation
-<li><b>CMMI ML - 3 Ver 1.3</b> issued by Zylog Systems - Outstanding contribution as a functional area representative
-<li><b>Performance Award</b> issued by Zylog Systems - Consistent high-quality and on-time delivery
-<li><b>Best Innovator Award</b> issued by Zylog Systems - Built enterprise-grade automation frameworks
-<li><b>Wizard Award</b> issued by Cognizant - Outstanding customer impact
-</ul>
-</div>
-</section>
-
-<!-- ABOUT ME -->
-<section id="about">
-<h3>About Me</h3>
-<div class="card">
-<p>Passionate Site Reliability Engineer and Senior Cloud Engineer Senior with 20+ years of experience designing and delivering scalable, secure, and highly reliable cloud-native solutions on Google Cloud Platform (GCP). I specialize in Site Reliability Engineering (SRE) and Test Automation, with a strong track record of translating complex business requirements into well-architected systems that drive measurable reliability, performance, and operational excellence.</p>
-<p>I lead observability and reliability initiatives, establishing SLIs, SLOs, and error budgets, and driving maturity across logging, metrics, tracing, dashboards, and actionable alerting. I design and implement automation to reduce operational toil, improve system resilience, and increase engineering efficiency—leveraging CI/CD pipelines, Infrastructure-as-Code, automated remediation, and chaos engineering. I actively champion shift-left reliability, embedding resilience and operational best practices early in the development lifecycle.</p>
-<p>My background also includes deep expertise in Web, Mobile, and API test automation and manual testing, using tools such as Appium, Selenium (Java), TestNG, JUnit, Cucumber, Allure, Jenkins, Maven, and Git. I excel in test strategy, framework design, estimation, and execution, as well as blameless postmortems, root-cause analysis, and cross-functional collaboration. I enjoy working with stakeholders to define efficient, scalable, and cost-effective technical solutions that enable teams to deliver high-quality software with confidence.</p>
-</div>
-</section>
-</div>
-</section>
-
-<!-- CONNECT -->
-<section id="connect">
-<h3>Connect Me</h3>
-<div class="grid-3">
-<div class="tile"><i class="fab fa-linkedin"></i><a href="https://www.linkedin.com/in/anantharaman-durairaju-87467045/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
-<div class="tile"><i class="fa fa-envelope"></i><a href="mailto:ananthusworld@gmail.com" target="_blank" rel="noopener noreferrer">Email</a></div>
-<div class="tile"><i class="fa fa-phone"></i><a href="tel:14156296149" target="_blank" rel="noopener noreferrer">Call</a></div>
-<div class="tile"><i class="fab fa-github"></i><a href="https://github.com/ananthusworld" target="_blank" rel="noopener noreferrer">GitHub</a></div>
-</div>
-</section>
-
-
-<footer>© 2026 Anantharaman Durairaju - Cumming, GA, USA</footer>
-
-<script>
-ScrollReveal().reveal('section',{delay:200,distance:'40px',origin:'bottom'});
-ScrollReveal().reveal('.hero',{delay:200});
-</script>
-
-<script>
-const menu = document.getElementById("mobile-menu");
-const links = document.getElementById("nav-links");
-
-menu.addEventListener("click", () => {
-  links.classList.toggle("active");
-});
-
-document.querySelectorAll(".nav-links a")
-  .forEach(link => {
-    link.addEventListener("click", () => {
-      links.classList.remove("active");
-    });
-  });
-</script>
-
-</body>
+    <section id="profileSummary">
+      <div class="card">
+        <!-- SRE-->
+        <section id="sre">
+          <h3>What is SRE?</h3>
+          <div class="card">
+            <h2>Site Reliability Engineering (SRE)</h2>
+            <p>If you’ve ever wondered why some apps never seem to crash while others fail at the worst possible moment, the answer often comes down to one thing: <b>Site Reliability Engineering (SRE)</b>
+            </p>
+            <b>What Is SRE, Really?</b>
+            <p>Site Reliability Engineering (SRE) is a way of making sure websites, apps, and online systems work reliably, consistently, and smoothly — even under pressure.</p>
+            <p>In simple words: <b>SRE is about keeping systems running without surprises.</b>
+            </p>
+            <p>Whether it’s a banking app, an e-commerce website, or a video streaming platform, SRE helps ensure:</p>
+            <ul>
+              <li>The app loads fast</li>
+              <li>Features work as expected</li>
+              <li>Downtime is rare</li>
+              <li>Problems are fixed quickly when they happen</li>
+            </ul>
+            <b>A Simple Real-Life Example</b>
+            <p>Imagine you run a food delivery app.</p>
+            <p>Users expect:</p>
+            <ul>
+              <li>The app to open instantly</li>
+              <li>⁠Payments to never fail</li>
+              <li>Orders to go through smoothly</li>
+              <li>The service to work 24/7</li>
+            </ul>
+            <p>Now imagine the app crashes on a busy weekend evening 😬 Orders fail. Users get angry. The business loses money. 👉 This is where SRE comes in.</p>
+            <p>SREs work behind the scenes to prevent crashes, detect issues early, and recover fast when something goes wrong.</p>
+            <b>Who Are Site Reliability Engineers?</b>
+            <p>Site Reliability Engineers are software engineers focused on reliability. They don’t just build features — they make sure those features:</p>
+            <ul>
+              <li>Stay available</li>
+              <li>Scale under heavy traffic</li>
+              <li>Don’t break unexpectedly</li>
+            </ul>
+            <p>You can think of them as:</p>
+            <ul>
+              <li>🧑 Doctors for systems</li>
+              <li>🚦 Traffic controllers for digital services</li>
+              <li>🧯 Firefighters for production issues</li>
+            </ul>
+          </div>
+        </section>
+        <!-- SRE for Mobile Apps -->
+        <section id="mobileAppSre">
+          <h3>Mobile SRE</h3>
+          <div class="card">
+            <h2>Site Reliability Engineering (SRE) for Mobile Native Applications</h2>
+            <b>Building Reliable, Scalable, and Observable Mobile Experiences on Google Cloud</b>
+            <p>Mobile applications today are mission-critical business platforms. For retail, e-commerce, and fintech companies, the mobile app is often the primary revenue channel. A one-second slowdown in checkout, a spike in crashes, or an authentication outage can directly translate into lost revenue and damaged customer trust.</p>
+            <p>Site Reliability Engineering (SRE) brings software engineering rigor to operations, ensuring that mobile platforms are reliable, fast, and resilient—even during extreme traffic spikes like Black Friday sales or payroll deposit days.</p>
+            <p>This article explores how SRE principles apply specifically to Mobile Native Apps (iOS & Android), including:</p>
+            <ul>
+              <li>Reliability architecture on Google Cloud</li>
+              <li>Mobile observability using Firebase</li>
+              <li>Crash and UI performance management</li>
+              <li>User adoption and funnel monitoring</li>
+              <li>Real-world retail, e-commerce, and fintech case studies</li>
+            </ul>
+            <b>Why Mobile SRE Is Different</b>
+            <p>Traditional SRE focuses heavily on backend systems. Mobile SRE expands that scope to include:</p>
+            <ul>
+              <li>Unreliable networks</li>
+              <li>Device fragmentation</li>
+              <li>OS upgrades</li>
+              <li>App store rollout delays</li>
+              <li>Client-side crashes</li>
+            </ul>
+            <p>Mobile SRE must treat the mobile app as a first-class production system, not just a client.</p>
+            <b>Core SRE Goals for Mobile Apps</b>
+            <p>Mobile reliability can be framed around four pillars:</p>
+            <ul>
+              <li>Availability – App and APIs are reachable</li>
+              <li>Performance – Fast startup and smooth navigation</li>
+              <li>Stability – Low crash & ANR rates</li>
+              <li>Scalability – Handle large spikes gracefully</li>
+            </ul>
+          </div>
+        </section>
+        <!-- Blogs -->
+        <section id="blogs">
+          <h3>Blogs</h3>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Google Cloud Blogs</h4>
+              <p>News, tips, and inspiration to accelerate your digital transformation</p>
+              <a href="https://cloud.google.com/blog" target="_blank" rel="noopener noreferrer">Read More -></a>
+            </div>
+            <div class="card">
+              <h4>Google Cloud APIs</h4>
+              <p>A full directory of every API you can call from your mobile app.</p>
+              <a href="https://cloud.google.com/apis" target="_blank" rel="noopener noreferrer">Read More -></a>
+            </div>
+            <div class="card">
+              <h4>Firebase Components</h4>
+              <p>Pre-built UI blocks for authentication and data handling to speed up your development.</p>
+              <a href="https://developers.google.com/products?text=firebase" target="_blank" rel="noopener noreferrer">Read More -></a>
+            </div>
+            <div class="card">
+              <h4>Google Cloud Cost Management</h4>
+              <p>Explore costs and usage management in Google Cloud Platform.</p>
+              <a href="https://docs.cloud.google.com/docs/costs-usage" target="_blank" rel="noopener noreferrer">Read More -></a>
+            </div>
+            <div class="card">
+              <h4>Google Cloud Codelabs</h4>
+              <p>Google Developers Codelabs provide a guided, tutorial, hands-on coding experience to help you learn how to build applications using Google Cloud Platform.</p>
+              <a href="https://codelabs.developers.google.com" target="_blank" rel="noopener noreferrer">Read More -></a>
+            </div>
+          </div>
+        </section>
+        <section id="profile">
+          <h3>Profile</h3>
+          <div class="card">
+            <div class="hero">
+              <div class="profile-wrap">
+                <img src="profile.jpg" alt="Profile">
+              </div>
+              <div>
+                <h1>Anantharaman Durairaju</h1>
+                <h4>Senior Software Engineer - SRE | Cloud | Test Automation @ Macy’s Tech</h4>
+                <p>Senior Software Engineer with 20+ years of experience delivering scalable, secure, and highly reliable cloud-native solutions. Specialized in Site Reliability Engineering, Observability, Automation, and Cloud Engineering.</p>
+                <div style="display:flex; justify-content:center;">
+                  <a class="btn" href="resume.pdf" target="_blank" rel="noopener noreferrer" download>Download Resume</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- WORK HISTORY -->
+        <section id="work">
+          <h3>Work History</h3>
+          <div class="card">
+            <div class="work-item">
+              <img src="macys.jpg" class="logo-img">
+              <div>
+                <b>Macy's Technology</b> – Senior Software Engineer (Present)
+              </div>
+            </div>
+            <div class="work-item">
+              <img src="apple.jpg" class="logo-img">
+              <div>
+                <b>Infosys / Apple Inc</b> – Technical Test Lead
+              </div>
+            </div>
+            <div class="work-item">
+              <img src="zylog.jpg" class="logo-img">
+              <div>
+                <b>Zylog Systems</b> – Assistant Project Manager
+              </div>
+            </div>
+            <div class="work-item">
+              <img src="cognizant.jpg" class="logo-img">
+              <div>
+                <b>Cognizant</b> – Programmer Analyst
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- PROJECTS -->
+        <section id="projects">
+          <h3>Projects</h3>
+          <div class="card">
+            <ul>
+              <li>
+                <b>Macy's / Bloomingdale's SRE</b> – Driving SLOs, observability, and automation for high-revenue eCommerce platforms.
+              </li>
+              <li>
+                <b>Macy's / Bloomingdale's Digital Test Automation</b> – Built scalable automation frameworks for web, mobile, and APIs.
+              </li>
+              <li>
+                <b>Apple Concierge & Radar</b> – Designed enterprise automation frameworks for internal Apple apps.
+              </li>
+              <li>
+                <b>Zylog Systems Field Power (WFMS)</b> – Enables the user to schedule and track work order information of Field Engineers
+              </li>
+              <li>
+                <b>Bank Muscat Mobile Banking</b> – Initiative is aimed at providing customers seamless connectivity to the Bank through Mobile Banking
+              </li>
+              <li>
+                <b>California CalWIN</b> – It is an on-line, real-time system that supports all the major processing functions necessary to administer California’s public assistance programs
+              </li>
+            </ul>
+          </div>
+        </section>
+        <!-- SKILLS -->
+        <section id="skills">
+          <h3>Skill Set</h3>
+          <div class="grid-2">
+            <div class="card">
+              <h4>Cloud</h4>
+              <p>AWS, Azure, Google Cloud Platform</p>
+            </div>
+            <div class="card">
+              <h4>Observability</h4>
+              <p>Dynatrace, Splunk, FullStory, Firebase, Google Monitoring</p>
+            </div>
+            <div class="card">
+              <h4>Incident Mgt & Alerting</h4>
+              <p>StatusPage, Moogsoft, Google Alert, Splunk, SentinalOne</p>
+            </div>
+            <div class="card">
+              <h4>DevOps</h4>
+              <p>Terraform, Ansible, Jenkins, Kubernetes</p>
+            </div>
+            <div class="card">
+              <h4>Programming</h4>
+              <p>Java, JavaScript, Python, SQL</p>
+            </div>
+            <div class="card">
+              <h4>Test Automation</h4>
+              <p>Selenium, Appium, Playwright, Cucumber, TestNG, JUnit</p>
+            </div>
+            <div class="card">
+              <h4>Databases</h4>
+              <p>MySQL, Oracle, SQL Server, MongoDB, DB2, Spanner</p>
+            </div>
+            <div class="card">
+              <h4>Data Visualization Tools</h4>
+              <p>Tableau, Power BI, Looker Studio</p>
+            </div>
+          </div>
+        </section>
+        <!-- EDUCATION -->
+        <section id="education">
+          <h3>Education</h3>
+          <div class="card">
+            <ul>
+              <li>Master of Computer Application (MCA) – SASTRA University, India</li>
+              <li>Bachelor of Science (BSc) in Computer Science – Bharathidasan University, India</li>
+            </ul>
+          </div>
+        </section>
+        <!-- CERTIFICATIONS -->
+        <section id="certifications">
+          <h3>Certifications</h3>
+          <div class="card">
+            <ul>
+              <li>Google Cloud – Professional Cloud Architect</li>
+              <li>LinkedIn – Site Reliability Engineering Essential Training</li>
+              <li>LSU – Introduction to DevOps</li>
+              <li>IBM Certified Solution Designer – RFT for Java</li>
+            </ul>
+          </div>
+        </section>
+        <!-- AWARDS -->
+        <section id="awards">
+          <h3>Awards</h3>
+          <div class="card">
+            <ul>
+              <li>
+                <b>Bright Spot Award - 2025</b> issued by Macys Tech - Played leadership role for Mobile App (iOS and Android) platforms and for driving a successful holiday period
+              <li>
+                <b>Bright Spot Award - 2023</b> issued by Macys Tech - Implemented order funnel automation test in production for macys.com & bloomingdales.com
+              <li>
+                <b>Bright Spot Award - 2018</b> issued by Macys Tech - Built the web security & vulnerability automated suite
+              <li>
+                <b>You are matter to us Award</b> issued by Infosys - Consistent high-quality test automation
+              <li>
+                <b>CMMI ML - 3 Ver 1.3</b> issued by Zylog Systems - Outstanding contribution as a functional area representative
+              <li>
+                <b>Performance Award</b> issued by Zylog Systems - Consistent high-quality and on-time delivery
+              <li>
+                <b>Best Innovator Award</b> issued by Zylog Systems - Built enterprise-grade automation frameworks
+              <li>
+                <b>Wizard Award</b> issued by Cognizant - Outstanding customer impact
+            </ul>
+          </div>
+        </section>
+        <!-- ABOUT ME -->
+        <section id="about">
+          <h3>About Me</h3>
+          <div class="card">
+            <p>Passionate Site Reliability Engineer and Senior Cloud Engineer Senior with 20+ years of experience designing and delivering scalable, secure, and highly reliable cloud-native solutions on Google Cloud Platform (GCP). I specialize in Site Reliability Engineering (SRE) and Test Automation, with a strong track record of translating complex business requirements into well-architected systems that drive measurable reliability, performance, and operational excellence.</p>
+            <p>I lead observability and reliability initiatives, establishing SLIs, SLOs, and error budgets, and driving maturity across logging, metrics, tracing, dashboards, and actionable alerting. I design and implement automation to reduce operational toil, improve system resilience, and increase engineering efficiency—leveraging CI/CD pipelines, Infrastructure-as-Code, automated remediation, and chaos engineering. I actively champion shift-left reliability, embedding resilience and operational best practices early in the development lifecycle.</p>
+            <p>My background also includes deep expertise in Web, Mobile, and API test automation and manual testing, using tools such as Appium, Selenium (Java), TestNG, JUnit, Cucumber, Allure, Jenkins, Maven, and Git. I excel in test strategy, framework design, estimation, and execution, as well as blameless postmortems, root-cause analysis, and cross-functional collaboration. I enjoy working with stakeholders to define efficient, scalable, and cost-effective technical solutions that enable teams to deliver high-quality software with confidence.</p>
+          </div>
+        </section>
+        <!-- CONNECT -->
+        <section id="connect">
+          <h3>Connect Me</h3>
+          <div class="grid-3">
+            <div class="tile">
+              <i class="fab fa-linkedin"></i>
+              <a href="https://www.linkedin.com/in/anantharaman-durairaju-87467045/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+            <div class="tile">
+              <i class="fa fa-envelope"></i>
+              <a href="mailto:ananthusworld@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+            </div>
+            <div class="tile">
+              <i class="fa fa-phone"></i>
+              <a href="tel:14156296149" target="_blank" rel="noopener noreferrer">Call</a>
+            </div>
+            <div class="tile">
+              <i class="fab fa-github"></i>
+              <a href="https://github.com/ananthusworld" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+    <footer>© 2026 Anantharaman Durairaju - Cumming, GA, USA</footer>
+    <script>
+      ScrollReveal().reveal('section', {
+        delay: 200,
+        distance: '40px',
+        origin: 'bottom'
+      });
+      ScrollReveal().reveal('.hero', {
+        delay: 200
+      });
+    </script>
+    <script>
+      const menu = document.getElementById("mobile-menu");
+      const links = document.getElementById("nav-links");
+      menu.addEventListener("click", () => {
+        links.classList.toggle("active");
+      });
+      document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+          links.classList.remove("active");
+        });
+      });
+    </script>
+  </body>
 </html>
