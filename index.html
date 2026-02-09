@@ -3,17 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anantharaman Durairaju | Senior Software Engineer</title>
+<title>Site Reliability Engineering (SRE)</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://unpkg.com/scrollreveal"></script>
 <style>
+
 :root{
   --bg:#050b24;
   --card:rgba(255,255,255,0.07);
   --accent:#4fa3ff;
   --soft:#9cc3ff;
 }
+
+.hero-container {
+      width: 100%;
+      max-width: 1800px;
+      margin: auto;
+      padding: 10px;
+    }
+
+.hero-image {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
 
 body{
   margin:0;
@@ -38,7 +54,7 @@ html{
 }
 
 .nav-container{
-  max-width:1200px;
+  max-width:1800px;
   margin:auto;
   padding:15px 25px;
   display:flex;
@@ -56,6 +72,7 @@ html{
 .nav-links{
   list-style:none;
   display:flex;
+  justify-content:flex-end;
   gap:25px;
 }
 
@@ -147,9 +164,6 @@ html{
 }
 .profile-wrap img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
 
-.hero h1{font-size:3.2rem;margin:0;}
-.hero h2{color:var(--soft);font-weight:400;}
-
 .btn{
   display:inline-block;margin-top:20px;padding:12px 28px;
   background:linear-gradient(135deg,#4fa3ff,#9cc3ff);
@@ -211,7 +225,7 @@ footer{text-align:center;opacity:0.7;margin-top:80px;}
 
 <nav class="navbar">
   <div class="nav-container">
-    <div class="logo">Anantharaman Profile </div>
+    <div class="logo">Site Reliability Engineering </div>
 
     <div class="menu-toggle" id="mobile-menu">
       <span></span>
@@ -220,36 +234,151 @@ footer{text-align:center;opacity:0.7;margin-top:80px;}
     </div>
 
     <ul class="nav-links" id="nav-links">
-      <li><a href="#work">Work History</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skill Set</a></li>
-      <li><a href="#education">Educations</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#awards">Awards</a></li>
+      <li><a href="#sre">SRE</a></li>
+      <li><a href="#mobileAppSre">Mobile SRE</a></li>
+      <li><a href="#blogs">Blogs</a></li>
+      <li><a href="#profile">Profile</a></li>
       <li><a href="#about">About Me</a></li>
-      <li><a href="#connect">Connect Me</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="menu-overlay" id="overlay"></div>
+<section class="hero"> </section>
 
-<div class="container">
-<!-- HERO -->
+<div class="hero-container">
+    <img 
+      src="hero.png" 
+      alt="Site Reliability Engineering"
+      class="hero-image"
+    />
+  </div>
+
+<section id="profileSummary">
+<div class="card">
+
+<!-- SRE-->
+<section id="sre">
+<h3>What is SRE?</h3>
+<div class="card">
+<h2>Site Reliability Engineering (SRE)</h2>
+<p>If you’ve ever wondered why some apps never seem to crash while others fail at the worst possible moment, the answer often comes down to one thing: <b>Site Reliability Engineering (SRE)</b></p>
+<b>What Is SRE, Really?</b>
+<p>Site Reliability Engineering (SRE) is a way of making sure websites, apps, and online systems work reliably, consistently, and smoothly — even under pressure.</p>
+<p>In simple words: <b>SRE is about keeping systems running without surprises.</b></p>
+<p>Whether it’s a banking app, an e-commerce website, or a video streaming platform, SRE helps ensure:</p>
+<ul>
+<li>The app loads fast</li>
+<li>Features work as expected</li>
+<li>Downtime is rare</li>
+<li>Problems are fixed quickly when they happen</li>
+</ul>
+
+
+<b>A Simple Real-Life Example</b>
+<p>Imagine you run a food delivery app.</p>
+<p>Users expect:</p>
+<ul>
+<li>The app to open instantly</li>
+<li>⁠Payments to never fail</li>
+<li>Orders to go through smoothly</li>
+<li>The service to work 24/7</li>
+</ul>
+
+<p>Now imagine the app crashes on a busy weekend evening 😬 Orders fail. Users get angry. The business loses money. 👉 This is where SRE comes in.</p>
+<p>SREs work behind the scenes to prevent crashes, detect issues early, and recover fast when something goes wrong.</p>
+
+
+<b>Who Are Site Reliability Engineers?</b>
+<p>Site Reliability Engineers are software engineers focused on reliability. They don’t just build features — they make sure those features:</p>
+<ul>
+<li>Stay available</li>
+<li>Scale under heavy traffic</li>
+<li>Don’t break unexpectedly</li>
+</ul>
+
+<p>You can think of them as:</p>
+<ul>
+<li>🧑 Doctors for systems</li>
+<li>🚦 Traffic controllers for digital services</li>
+<li>🧯 Firefighters for production issues</li>
+</ul>
+</div>
+</section>
+
+<!-- SRE for Mobile Apps -->
+<section id="mobileAppSre">
+<h3>Mobile SRE</h3>
+<div class="card">
+<h2>Site Reliability Engineering (SRE) for Mobile Native Applications</h2>
+<b>Building Reliable, Scalable, and Observable Mobile Experiences on Google Cloud</b>
+<p>Mobile applications today are mission-critical business platforms. For retail, e-commerce, and fintech companies, the mobile app is often the primary revenue channel. A one-second slowdown in checkout, a spike in crashes, or an authentication outage can directly translate into lost revenue and damaged customer trust.</p>
+<p>Site Reliability Engineering (SRE) brings software engineering rigor to operations, ensuring that mobile platforms are reliable, fast, and resilient—even during extreme traffic spikes like Black Friday sales or payroll deposit days.</p>
+<p>This article explores how SRE principles apply specifically to Mobile Native Apps (iOS & Android), including:</p>
+<ul>
+<li>Reliability architecture on Google Cloud</li>
+<li>Mobile observability using Firebase</li>
+<li>Crash and UI performance management</li>
+<li>User adoption and funnel monitoring</li>
+<li>Real-world retail, e-commerce, and fintech case studies</li>
+</ul>
+<b>Why Mobile SRE Is Different</b>
+
+<p>Traditional SRE focuses heavily on backend systems. Mobile SRE expands that scope to include:</p>
+<ul>
+<li>Unreliable networks</li>
+<li>Device fragmentation</li>
+<li>OS upgrades</li>
+<li>App store rollout delays</li>
+<li>Client-side crashes</li>
+</ul>
+<p>Mobile SRE must treat the mobile app as a first-class production system, not just a client.</p>
+
+<b>Core SRE Goals for Mobile Apps</b>
+<p>Mobile reliability can be framed around four pillars:</p>
+<ul>
+<li>Availability – App and APIs are reachable</li>
+<li>Performance – Fast startup and smooth navigation</li>
+<li>Stability – Low crash & ANR rates</li>
+<li>Scalability – Handle large spikes gracefully</li>
+</ul>
+</div>
+</section>
+
+
+<!-- Blogs -->
+<section id="blogs">
+<h3>Blogs</h3>
+<div class="grid-2">
+<div class="card"><h4>Google Cloud Blogs</h4><p>News, tips, and inspiration to accelerate your digital transformation</p><a href="https://cloud.google.com/blog" target="_blank" rel="noopener noreferrer">Read More -></a></div>
+<div class="card"><h4>Google Cloud APIs</h4><p>A full directory of every API you can call from your mobile app.</p><a href="https://cloud.google.com/apis" target="_blank" rel="noopener noreferrer">Read More -></a></div>
+<div class="card"><h4>Firebase Components</h4><p>Pre-built UI blocks for authentication and data handling to speed up your development.</p><a href="https://developers.google.com/products?text=firebase" target="_blank" rel="noopener noreferrer">Read More -></a></div>
+<div class="card"><h4>Google Cloud Cost Management</h4><p>Explore costs and usage management in Google Cloud Platform.</p><a href="https://docs.cloud.google.com/docs/costs-usage" target="_blank" rel="noopener noreferrer">Read More -></a></div>
+<div class="card"><h4>Google Cloud Codelabs</h4><p>Google Developers Codelabs provide a guided, tutorial, hands-on coding experience to help you learn how to build applications using Google Cloud Platform.</p><a href="https://codelabs.developers.google.com" target="_blank" rel="noopener noreferrer">Read More -></a></div>
+</div>
+</section>
+
+
+
+<section id="profile">
+<h3>Profile</h3>
+<div class="card">
 <div class="hero">
 <div class="profile-wrap">
 <img src="profile.jpg" alt="Profile">
 </div>
 <div>
 <h1>Anantharaman Durairaju</h1>
-<h2>Senior Software Engineer - SRE | Cloud | Test Automation @ Macy’s Tech
-</h2>
+<h4>Senior Software Engineer - SRE | Cloud | Test Automation @ Macy’s Tech</h4>
 <p>Senior Software Engineer with 20+ years of experience delivering scalable, secure, and highly reliable cloud-native solutions. Specialized in Site Reliability Engineering, Observability, Automation, and Cloud Engineering.</p>
 <div style="display:flex; justify-content:center;">
 <a class="btn" href="resume.pdf" target="_blank" rel="noopener noreferrer" download>Download Resume</a>
 </div>
 </div>
 </div>
+</div>
+</section>
+
 
 <!-- WORK HISTORY -->
 <section id="work">
@@ -342,6 +471,8 @@ footer{text-align:center;opacity:0.7;margin-top:80px;}
 <p>My background also includes deep expertise in Web, Mobile, and API test automation and manual testing, using tools such as Appium, Selenium (Java), TestNG, JUnit, Cucumber, Allure, Jenkins, Maven, and Git. I excel in test strategy, framework design, estimation, and execution, as well as blameless postmortems, root-cause analysis, and cross-functional collaboration. I enjoy working with stakeholders to define efficient, scalable, and cost-effective technical solutions that enable teams to deliver high-quality software with confidence.</p>
 </div>
 </section>
+</div>
+</section>
 
 <!-- CONNECT -->
 <section id="connect">
@@ -354,8 +485,8 @@ footer{text-align:center;opacity:0.7;margin-top:80px;}
 </div>
 </section>
 
+
 <footer>© 2026 Anantharaman Durairaju - Cumming, GA, USA</footer>
-</div>
 
 <script>
 ScrollReveal().reveal('section',{delay:200,distance:'40px',origin:'bottom'});
