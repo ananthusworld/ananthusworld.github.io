@@ -284,80 +284,6 @@
         font-style: italic;
       }
 
-      .feedback-form {
-        display: grid;
-        gap: 14px;
-        margin-bottom: 24px;
-      }
-
-      .feedback-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-      }
-
-      .feedback-form label {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        font-size: 0.95rem;
-      }
-
-      .feedback-form input,
-      .feedback-form textarea {
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 10px;
-        padding: 10px 12px;
-        background: rgba(255, 255, 255, 0.08);
-        color: #fff;
-        font-family: inherit;
-      }
-
-      .feedback-form textarea {
-        min-height: 120px;
-        resize: vertical;
-      }
-
-      .feedback-submit {
-        width: fit-content;
-        border: none;
-        cursor: pointer;
-      }
-
-      .feedback-list {
-        display: grid;
-        gap: 14px;
-      }
-
-      .feedback-item {
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 14px;
-        padding: 16px;
-      }
-
-      .feedback-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-        color: var(--soft);
-      }
-
-      .feedback-empty {
-        opacity: 0.85;
-        margin: 0;
-      }
-
-      .feedback-date {
-        opacity: 0.8;
-      }
-
-      .feedback-status {
-        margin: 0 0 16px;
-        color: #9ef5c4;
-        font-size: 0.92rem;
-      }
 
       footer {
         text-align: center;
@@ -402,9 +328,6 @@
           </li>
           <li>
             <a href="#about">About Me</a>
-          </li>
-          <li>
-            <a href="#feedback">Feedback</a>
           </li>
         </ul>
       </div>
@@ -729,30 +652,6 @@
             <p>My background also includes deep expertise in Web, Mobile, and API test automation and manual testing, using tools such as Appium, Selenium (Java), TestNG, JUnit, Cucumber, Allure, Jenkins, Maven, and Git. I excel in test strategy, framework design, estimation, and execution, as well as blameless postmortems, root-cause analysis, and cross-functional collaboration. I enjoy working with stakeholders to define efficient, scalable, and cost-effective technical solutions that enable teams to deliver high-quality software with confidence.</p>
           </div>
         </section>
-        <section id="feedback">
-          <h3>Feedback</h3>
-          <div class="card">
-            <p id="feedbackStatus" class="feedback-status" aria-live="polite"></p>
-            <form id="feedbackForm" class="feedback-form">
-              <div class="feedback-grid">
-                <label for="firstName">First Name
-                  <input id="firstName" name="firstName" type="text" required>
-                </label>
-                <label for="lastName">Last Name
-                  <input id="lastName" name="lastName" type="text" required>
-                </label>
-                <label for="email">Email ID
-                  <input id="email" name="email" type="email" required>
-                </label>
-              </div>
-              <label for="comments">Comments
-                <textarea id="comments" name="comments" required></textarea>
-              </label>
-              <button type="submit" class="btn feedback-submit">Send Feedback</button>
-            </form>
-            <div id="feedbackList" class="feedback-list"></div>
-          </div>
-        </section>
         <!-- CONNECT -->
         <section id="connect">
           <h3>Connect Me</h3>
@@ -800,120 +699,6 @@
         });
       });
 
-      const feedbackStorageKey = "viewerFeedbacks";
-      const feedbackForm = document.getElementById("feedbackForm");
-      const feedbackList = document.getElementById("feedbackList");
-      const feedbackStatus = document.getElementById("feedbackStatus");
-
-      function getFeedbacks() {
-        const storedFeedbacks = localStorage.getItem(feedbackStorageKey);
-        if (!storedFeedbacks) {
-          return [];
-        }
-
-        try {
-          const parsed = JSON.parse(storedFeedbacks);
-          return Array.isArray(parsed) ? parsed : [];
-        } catch {
-          return [];
-        }
-      }
-
-      function persistFeedbacks(feedbacks) {
-        localStorage.setItem(feedbackStorageKey, JSON.stringify(feedbacks));
-      }
-
-      function formatSubmittedDate(submittedAt) {
-        if (!submittedAt) {
-          return "";
-        }
-
-        const date = new Date(submittedAt);
-        if (Number.isNaN(date.getTime())) {
-          return "";
-        }
-
-        return date.toLocaleString();
-      }
-
-      function createFeedbackItem(feedback) {
-        const article = document.createElement("article");
-        article.className = "feedback-item";
-
-        const meta = document.createElement("div");
-        meta.className = "feedback-meta";
-
-        const name = document.createElement("span");
-        const strong = document.createElement("strong");
-        strong.textContent = `${feedback.firstName} ${feedback.lastName}`;
-        name.appendChild(strong);
-
-        const email = document.createElement("span");
-        email.textContent = feedback.email;
-
-        const submittedDate = document.createElement("span");
-        submittedDate.className = "feedback-date";
-        submittedDate.textContent = formatSubmittedDate(feedback.submittedAt);
-
-        meta.appendChild(name);
-        meta.appendChild(email);
-        if (submittedDate.textContent) {
-          meta.appendChild(submittedDate);
-        }
-
-        const comments = document.createElement("p");
-        comments.textContent = feedback.comments;
-
-        article.appendChild(meta);
-        article.appendChild(comments);
-
-        return article;
-      }
-
-      function renderFeedbacks() {
-        const feedbacks = getFeedbacks();
-        feedbackList.innerHTML = "";
-
-        if (!feedbacks.length) {
-          const emptyState = document.createElement("p");
-          emptyState.className = "feedback-empty";
-          emptyState.textContent = "No feedback yet. Be the first to share your thoughts!";
-          feedbackList.appendChild(emptyState);
-          return;
-        }
-
-        feedbacks.forEach((feedback) => {
-          feedbackList.appendChild(createFeedbackItem(feedback));
-        });
-      }
-
-      feedbackForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        const formData = new FormData(feedbackForm);
-        const newFeedback = {
-          firstName: formData.get("firstName").toString().trim(),
-          lastName: formData.get("lastName").toString().trim(),
-          email: formData.get("email").toString().trim(),
-          comments: formData.get("comments").toString().trim(),
-          submittedAt: new Date().toISOString()
-        };
-
-        if (!newFeedback.firstName || !newFeedback.lastName || !newFeedback.email || !newFeedback.comments) {
-          feedbackStatus.textContent = "Please fill out all fields before submitting.";
-          return;
-        }
-
-        const feedbacks = getFeedbacks();
-        feedbacks.unshift(newFeedback);
-        persistFeedbacks(feedbacks);
-
-        feedbackForm.reset();
-        feedbackStatus.textContent = "Thank you! Your feedback has been saved and is now displayed below.";
-        renderFeedbacks();
-      });
-
-      renderFeedbacks();
     </script>
   </body>
 </html>
