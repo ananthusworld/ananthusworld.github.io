@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRE &amp; Artificial Intelligence: Building Resilient Intelligent Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #050b24;
+        --text: #ffffff;
+        --muted: #9cc3ff;
+        --accent: #4fa3ff;
+        --card: rgba(255, 255, 255, 0.07);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        background: radial-gradient(circle at top, #0b2a66, var(--bg));
+        color: var(--text);
+        line-height: 1.75;
+      }
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 36px 18px 70px;
+      }
+      .article {
+        background: var(--card);
+        border-radius: 14px;
+        padding: 40px 34px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      }
+      .kicker {
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+      }
+      h1 {
+        font-size: 2.1rem;
+        margin: 8px 0 14px;
+        line-height: 1.25;
+      }
+      .subtitle {
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      h2 {
+        margin-top: 34px;
+        font-size: 1.35rem;
+        line-height: 1.3;
+      }
+      p, li { font-size: 1.03rem; }
+      ul { padding-left: 22px; }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 700;
+        font-style: italic;
+      }
+      a:hover { text-decoration: underline; }
+      .callout {
+        border-left: 4px solid var(--accent);
+        background: rgba(79, 163, 255, 0.15);
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin: 16px 0;
+      }
+      .back-link { display: inline-block; margin-top: 24px; }
+      @media (max-width: 768px) {
+        .article { padding: 26px 18px; }
+        h1 { font-size: 1.75rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <article class="article">
+        <div class="kicker">SRE &amp; AI</div>
+        <h1>SRE &amp; Artificial Intelligence: Building Resilient Intelligent Systems</h1>
+        <p class="subtitle">How Site Reliability Engineering evolves when software is no longer deterministic, but probabilistic, data-driven, and continuously learning.</p>
+
+        <p>
+          Site Reliability Engineering was born in a world where most production systems were deterministic. A request
+          entered a service, the service executed predictable code paths, and the response returned with measurable
+          latency and error rates. SRE practices matured around that assumption: define service-level indicators,
+          establish service-level objectives, guard error budgets, automate toil, and continuously improve reliability.
+          Artificial Intelligence changes that foundation. AI systems add new classes of uncertainty—model drift,
+          non-deterministic outputs, probabilistic failures, unstructured prompt inputs, and evolving data quality.
+          That does not make SRE less relevant; it makes SRE more critical.
+        </p>
+
+        <p>
+          In modern platforms, AI is not a side project. Recommendation engines decide product discovery, fraud models
+          gate financial transactions, conversational agents shape customer support, and forecasting models influence
+          supply-chain decisions. If these systems fail silently, degrade gradually, or deliver harmful responses, the
+          business impact can be immediate. Revenue, trust, compliance posture, and brand reputation all depend on
+          reliability disciplines that can handle both software and model behavior. SRE provides the operating model to
+          do exactly that, but teams must expand definitions, metrics, tooling, and incident response playbooks.
+        </p>
+
+        <div class="callout">
+          Traditional reliability asks, “Is the system up?” AI reliability asks, “Is the system up, fast,
+          safe, and still making high-quality decisions under changing real-world conditions?”
+        </div>
+
+        <h2>Why AI Workloads Need an SRE Mindset</h2>
+        <p>
+          AI services combine infrastructure risk and decision-quality risk. A model endpoint can return HTTP 200 while
+          still producing low-value or unsafe outputs. Conversely, infrastructure may be healthy while upstream feature
+          pipelines inject stale or skewed data. This means uptime alone is insufficient. SRE teams supporting AI must
+          monitor reliability as a multi-dimensional contract that includes latency, correctness proxies, safety,
+          freshness, and cost efficiency. The goal is dependable customer outcomes, not only healthy containers.
+        </p>
+
+        <p>
+          Another challenge is dependency layering. AI systems typically rely on feature stores, vector databases,
+          retrieval pipelines, prompt templates, model gateways, GPU scheduling, and external foundation-model APIs.
+          Any weak link can degrade experience. A recommendation service might remain available but become irrelevant if
+          embeddings are stale. A support chatbot might be responsive but hallucinate policy details if retrieval fails.
+          SRE practices such as dependency mapping, golden signal instrumentation, and fault isolation become essential
+          guardrails for these layered architectures.
+        </p>
+
+        <h2>Redefining SLIs and SLOs for AI Systems</h2>
+        <p>
+          The most practical shift is to broaden SLI design. Classic indicators—availability, latency, and error rate—
+          still matter and must remain foundational. However, AI-enabled services need additional SLIs that capture model
+          and data behavior. Teams often adopt a two-tier model: platform SLOs for serving infrastructure and quality
+          SLOs for model outputs. This avoids conflating operational outages with model-performance regressions while
+          preserving accountability for user impact.
+        </p>
+
+        <ul>
+          <li><b>Serving reliability SLIs:</b> p95 inference latency, timeout rate, GPU queue depth, and endpoint availability.</li>
+          <li><b>Data reliability SLIs:</b> feature freshness lag, missing feature percentage, schema drift frequency.</li>
+          <li><b>Model quality SLIs:</b> precision/recall proxies, ranking relevance, hallucination rate, fallback invocation rate.</li>
+          <li><b>Safety and policy SLIs:</b> toxic response detection, PII leakage incidents, policy-violation rate.</li>
+          <li><b>Experience SLIs:</b> resolution rate, conversion lift, containment rate, user satisfaction trend.</li>
+        </ul>
+
+        <p>
+          SLOs built on these indicators should align with business criticality. For instance, a customer-support AI may
+          have a strict policy-compliance SLO but slightly looser latency targets during off-peak periods. A real-time
+          fraud model may prioritize low false negatives and bounded decision latency over broad model complexity.
+          Error budgets can also evolve: when quality budgets are burned, launch velocity should slow and reliability
+          work should be prioritized, just as with traditional service outages.
+        </p>
+
+        <h2>Observability for AI: From Metrics to Meaning</h2>
+        <p>
+          Observability in AI systems must connect telemetry with decision outcomes. Metrics-only dashboards are
+          insufficient if teams cannot explain why model behavior changed. Mature teams instrument the full lifecycle:
+          data ingestion, feature engineering, model versioning, inference traces, user feedback loops, and downstream
+          business outcomes. Correlation across these layers helps reduce mean time to understanding, which is often as
+          important as mean time to recovery in AI incidents.
+        </p>
+
+        <p>
+          For generative AI applications, traceability becomes even more important. Teams should capture prompt versions,
+          retrieval context identifiers, model configuration parameters, and guardrail decisions for each request.
+          Structured telemetry enables reproducibility of failures and supports faster root-cause analysis. Without this,
+          debugging becomes anecdotal and postmortems become guesswork. With it, SRE and ML engineers can quickly
+          identify whether issues came from prompt changes, retrieval misses, model upgrades, traffic anomalies, or
+          external API degradation.
+        </p>
+
+        <h2>Incident Management in AI-Driven Production</h2>
+        <p>
+          Incident response for AI systems requires expanded severity models. A total endpoint outage is still a
+          Sev-1 event, but silent quality degradation may also deserve high severity if it affects critical journeys.
+          Teams should predefine incident categories such as latency degradation, stale model deployment, data pipeline
+          corruption, safety policy breach, and retrieval collapse. Each category needs a runbook with clear owners,
+          rollback steps, and communication templates.
+        </p>
+
+        <p>
+          One useful pattern is progressive fallback architecture. If a primary model degrades, systems can route
+          traffic to a smaller but stable model, deterministic rules engine, cached response layer, or human-in-the-loop
+          queue. The fallback might reduce capability, but it protects core customer operations. SRE teams should test
+          these pathways through game days that simulate feature drift, vector index outages, token quota exhaustion,
+          and region-level model endpoint failures. Reliability is earned before incidents, not during them.
+        </p>
+
+        <h2>Capacity Engineering and Cost Reliability</h2>
+        <p>
+          AI introduces a cost-performance-reliability triangle that SRE must actively manage. Inference workloads can be
+          expensive and bursty, especially for large language models. A service may meet latency targets by over-scaling
+          GPUs, but unsustainable spend becomes its own reliability risk for the business. Conversely, aggressive cost
+          controls can create queueing delays and timeouts. Capacity plans therefore need shared ownership across SRE,
+          platform engineering, and product stakeholders.
+        </p>
+
+        <p>
+          Practical strategies include dynamic autoscaling policies, request batching, model quantization,
+          cache-aware routing, tiered model selection, and admission control during peak load. SRE teams can define cost
+          SLOs alongside latency SLOs to preserve financial resilience. For example, “maintain p95 latency below 800 ms
+          while keeping cost per 1,000 requests within approved bounds.” This frames reliability as both technical and
+          economic sustainability.
+        </p>
+
+        <h2>Automation, AIOps, and Human Judgment</h2>
+        <p>
+          AI-enhanced operations can help SRE teams reduce noise and respond faster. Intelligent alert grouping,
+          anomaly detection, and probable-cause suggestions can lower cognitive load during incidents. Yet automation
+          must remain auditable and bounded. Auto-remediation actions should have safety checks, blast-radius limits,
+          and rollback controls. The objective is not to remove humans; it is to reserve human judgment for
+          high-ambiguity decisions while routine remediation is safely automated.
+        </p>
+
+        <p>
+          Teams that succeed typically adopt layered automation. Level one handles deterministic actions such as restarts
+          or failovers. Level two provides guided remediation with operator confirmation. Level three enables controlled
+          autonomous interventions for well-understood patterns. Post-incident reviews should validate whether automation
+          helped, harmed, or should be redesigned. Continuous calibration prevents over-trust in black-box operations.
+        </p>
+
+        <h2>Security, Compliance, and Reliability Convergence</h2>
+        <p>
+          In AI systems, security and reliability are deeply connected. Prompt injection, data poisoning,
+          model exfiltration, and unauthorized access can quickly become availability or correctness incidents.
+          Regulatory expectations around explainability, privacy, and fairness add additional operational constraints.
+          SRE practices should integrate with security engineering through shared controls and incident processes.
+        </p>
+
+        <ul>
+          <li><b>Access control:</b> enforce least privilege across model registries, feature stores, and prompt assets.</li>
+          <li><b>Data governance:</b> validate data lineage, retention, masking, and consent boundaries.</li>
+          <li><b>Runtime guardrails:</b> content filters, policy engines, and outbound data-loss prevention checks.</li>
+          <li><b>Auditability:</b> preserve immutable logs for model versions, prompts, responses, and interventions.</li>
+          <li><b>Resilience testing:</b> include adversarial and abuse scenarios in reliability game days.</li>
+        </ul>
+
+        <p>
+          When security and SRE teams collaborate on shared reliability objectives, organizations detect issues earlier
+          and recover faster. This integrated posture is especially important in finance, healthcare, and regulated
+          commerce where failures are both technical and legal events.
+        </p>
+
+        <h2>Operating Model: How Teams Should Work</h2>
+        <p>
+          High-performing organizations avoid siloed ownership between ML engineers, platform teams, and SREs.
+          Instead, they create a joint operating model with clear interfaces. ML teams own model development and quality
+          improvements. Platform teams own serving infrastructure and data pipelines. SRE teams own service reliability
+          policy, production readiness standards, incident excellence, and cross-cutting automation. Product leaders help
+          prioritize trade-offs using customer impact and business value.
+        </p>
+
+        <p>
+          Before launch, every AI service should pass a production readiness review that includes SLO definitions,
+          telemetry coverage, rollback strategy, fallback behavior, data-dependency mapping, and ownership on-call plans.
+          After launch, weekly reliability reviews should examine budget burn, model drift indicators, and near-miss
+          incidents. This cadence turns reliability into a repeatable discipline rather than an emergency activity.
+        </p>
+
+        <h2>A Practical 90-Day Roadmap for SRE + AI</h2>
+        <p>
+          Teams beginning this journey can execute a focused ninety-day plan. First, identify one critical
+          AI-powered user journey—such as checkout recommendations, fraud screening, or support automation.
+          Second, define minimum viable SLIs spanning serving, data freshness, and quality proxies.
+          Third, implement dashboards and alerting that combine these dimensions. Fourth, create incident runbooks
+          with tested fallback paths. Fifth, run at least one game day to validate response coordination.
+          Sixth, document a postmortem and convert findings into backlog commitments.
+        </p>
+
+        <p>
+          This approach delivers tangible reliability gains without waiting for perfect architecture. Over time,
+          organizations can expand to advanced controls like adaptive routing, canary model rollouts,
+          shadow evaluation pipelines, and automated governance checks. The key is iterative maturity:
+          start with observability and response fundamentals, then scale sophistication.
+        </p>
+
+
+        <h2>Common Anti-Patterns to Avoid</h2>
+        <p>
+          Many teams adopt AI quickly but repeat avoidable reliability mistakes. One anti-pattern is shipping a model
+          to production with no explicit SLOs, then treating quality complaints as subjective feedback. Another is
+          separating ML experimentation from production observability, which creates blind spots once traffic scales.
+          A third is relying only on offline evaluation scores while ignoring live user behavior and drift signals.
+          Teams also underestimate the operational risk of unmanaged prompts, undocumented retrieval dependencies,
+          and ad-hoc feature pipelines. Finally, some organizations push full autonomy too early in incident response,
+          allowing automation to amplify errors. The better approach is disciplined progression: baseline metrics,
+          controlled rollouts, well-tested fallbacks, and governance checkpoints that mature with system complexity.
+        </p>
+
+        <h2>Final Thoughts</h2>
+        <p>
+          Artificial Intelligence is reshaping digital products, but it also expands the failure surface in production.
+          Site Reliability Engineering is the discipline that keeps this complexity from becoming chaos.
+          By evolving SLOs, observability, incident playbooks, capacity management, and governance for AI realities,
+          organizations can deliver systems that are not only innovative, but dependable. The future belongs to teams
+          that treat reliability as a feature of intelligence itself—measurable, engineered, and continuously improved.
+        </p>
+
+        <a class="back-link" href="index.html#blogs">← Back to Blogs</a>
+      </article>
+    </main>
+  </body>
+</html>
