@@ -74,6 +74,18 @@
         padding: 16px;
         margin: 14px 0;
       }
+      .architecture-figure { margin: 18px 0 12px; }
+      .architecture-image {
+        width: 100%;
+        border: 1px solid #d1d5db;
+        border-radius: 12px;
+        background: #fff;
+      }
+      .architecture-caption {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
       .back-link { display: inline-block; margin-top: 24px; }
       @media (max-width: 768px) {
         .article { padding: 26px 18px; }
@@ -120,10 +132,10 @@
         </ul>
 
         <h2>Mobile App Site Reliability Architecture on Google Cloud</h2>
-        <p>
-          The architecture section is based on this reference discussion:
-          <a href="https://chatgpt.com/c/69821745-1428-8328-9403-4d41d43b9dcf" target="_blank" rel="noopener noreferrer">Mobile App Site Reliability Architecture on Google Cloud</a>.
-        </p>
+        <figure class="architecture-figure">
+          <img class="architecture-image" src="mobile-sre-architecture.svg" alt="Mobile SRE Architecture on Google Cloud showing mobile app, Firebase observability, API gateway, microservices, and backend data services" />
+          <figcaption class="architecture-caption">Mobile App Site Reliability Architecture on Google Cloud.</figcaption>
+        </figure>
         <p>
           A practical reliability architecture includes Cloud Load Balancer at the edge, GKE or Cloud Run for stateless
           API services, Memorystore for low-latency cache, Cloud SQL/Spanner for persistent data, Pub/Sub for asynchronous
