@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960" role="img" aria-labelledby="title desc">
+  <title id="title">Mobile SRE Architecture on Google Cloud</title>
+  <desc id="desc">Architecture flow showing Mobile App, Firebase services, API Gateway, GKE or Cloud Run microservices, observability and backend data services.</desc>
+  <defs>
+    <style>
+      .title { font: 700 56px Arial, sans-serif; fill: #243042; }
+      .subtitle { font: 400 38px Arial, sans-serif; fill: #405167; }
+      .box { fill: #fff; stroke: #cfd6df; stroke-width: 2; }
+      .label { font: 600 22px Arial, sans-serif; fill: #243042; }
+      .small { font: 500 18px Arial, sans-serif; fill: #3b4c62; }
+      .arrow { stroke: #50627a; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .phone { fill: #f8fafc; stroke: #26374d; stroke-width: 8; }
+      .panel { fill: #2563eb; }
+      .panelText { font: 700 40px Arial, sans-serif; fill: #fff; }
+      .panelSub { font: 500 22px Arial, sans-serif; fill: #dbeafe; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#50627a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="960" fill="#f2f4f7"/>
+
+  <text x="800" y="90" text-anchor="middle" class="title">Mobile SRE Architecture on Google Cloud</text>
+  <text x="800" y="145" text-anchor="middle" class="subtitle">Reliable &amp; Scalable Infrastructure for Retail &amp; Fintech Apps</text>
+
+  <!-- Phone -->
+  <rect x="60" y="320" rx="30" ry="30" width="180" height="360" class="phone"/>
+  <rect x="85" y="515" width="130" height="90" class="panel"/>
+  <text x="150" y="555" text-anchor="middle" class="panelText" style="font-size:40px">Mobile App</text>
+  <text x="150" y="590" text-anchor="middle" class="panelSub">(iOS / Android)</text>
+
+  <!-- Left services -->
+  <rect x="290" y="350" rx="10" ry="10" width="230" height="70" class="box"/>
+  <text x="405" y="395" text-anchor="middle" class="label">Cloud CDN</text>
+
+  <rect x="290" y="445" rx="10" ry="10" width="230" height="85" class="box"/>
+  <text x="405" y="480" text-anchor="middle" class="label">Firebase</text>
+  <text x="405" y="510" text-anchor="middle" class="small">Crashlytics</text>
+
+  <rect x="290" y="550" rx="10" ry="10" width="230" height="85" class="box"/>
+  <text x="405" y="585" text-anchor="middle" class="label">Firebase</text>
+  <text x="405" y="615" text-anchor="middle" class="small">Performance</text>
+
+  <rect x="290" y="655" rx="10" ry="10" width="230" height="85" class="box"/>
+  <text x="405" y="690" text-anchor="middle" class="label">Firebase</text>
+  <text x="405" y="720" text-anchor="middle" class="small">Analytics</text>
+
+  <!-- API Gateway -->
+  <rect x="570" y="460" rx="10" ry="10" width="170" height="80" class="box"/>
+  <text x="655" y="495" text-anchor="middle" class="label">API Gateway</text>
+  <text x="655" y="523" text-anchor="middle" class="small">/ Apigee</text>
+
+  <!-- Microservices -->
+  <rect x="790" y="420" rx="12" ry="12" width="340" height="170" class="box"/>
+  <text x="960" y="480" text-anchor="middle" class="label">GKE / Cloud Run</text>
+  <text x="960" y="515" text-anchor="middle" class="label">Microservices</text>
+
+  <!-- Monitoring -->
+  <rect x="770" y="650" rx="10" ry="10" width="380" height="70" class="box"/>
+  <text x="960" y="693" text-anchor="middle" class="label">Cloud Monitoring &amp; Logging</text>
+
+  <rect x="790" y="770" rx="10" ry="10" width="340" height="90" class="box"/>
+  <text x="960" y="822" text-anchor="middle" class="label">Grafana &amp; Looker Dashboards</text>
+
+  <!-- Right services -->
+  <rect x="1240" y="350" rx="10" ry="10" width="280" height="70" class="box"/>
+  <text x="1380" y="395" text-anchor="middle" class="label">Cloud SQL / Spanner</text>
+
+  <rect x="1240" y="455" rx="10" ry="10" width="280" height="70" class="box"/>
+  <text x="1380" y="500" text-anchor="middle" class="label">Firestore Database</text>
+
+  <rect x="1240" y="560" rx="10" ry="10" width="280" height="70" class="box"/>
+  <text x="1380" y="605" text-anchor="middle" class="label">Pub/Sub Messaging</text>
+
+  <rect x="1240" y="665" rx="10" ry="10" width="280" height="70" class="box"/>
+  <text x="1380" y="710" text-anchor="middle" class="label">Redis Cache</text>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M240 385 H287"/>
+  <path class="arrow" d="M240 487 H287"/>
+  <path class="arrow" d="M240 592 H287"/>
+
+  <path class="arrow" d="M520 385 H545 V500 H567"/>
+  <path class="arrow" d="M520 487 H567"/>
+
+  <path class="arrow" d="M740 500 H787"/>
+
+  <path class="arrow" d="M1130 500 H1180 V385 H1237"/>
+  <path class="arrow" d="M1130 500 H1180 V490 H1237"/>
+  <path class="arrow" d="M1130 500 H1180 V595 H1237"/>
+  <path class="arrow" d="M1130 500 H1180 V700 H1237"/>
+
+  <path class="arrow" d="M960 770 V723"/>
+  <path class="arrow" d="M960 650 V593"/>
+</svg>
