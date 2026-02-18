@@ -247,7 +247,6 @@
           <li><a href="#articles">Articles</a></li>
           <li><a href="#philosophy">Philosophy</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#feedback">Feedback</a></li>
         </ul>
       </div>
     </header>
@@ -306,25 +305,50 @@
         </div>
       </section>
 
-      <section id="about">
-        <h2>About</h2>
-        <div class="panel">
-          SRE Academy is an educational platform focused on practical reliability skills. Our goal is to help students, developers, and platform teams apply SRE principles with confidence in production environments.
-        </div>
+      <section id="philosophy">
+          <h2>Reliability Is a Team Habit, Not a Tool Purchase</h2>
+          <div class="panel">
+			<p>Reliability is often misunderstood as a property that appears when teams buy a monitoring product, add a dashboard, or assign one engineer to “own uptime.” In practice, reliability is a design discipline and an organizational habit. It is created through thousands of small choices: API timeouts, rollback strategy, test coverage, paging policies, dependency isolation, release pacing, and post-incident learning. Strong SRE cultures do not begin with panic; they begin with clarity on user promises and an agreement that resilience is everyone’s responsibility. From product managers to backend engineers to mobile developers, each role contributes to the quality of service people actually experience.</p>
+            <p>The philosophy below is practical rather than theoretical. It translates SRE ideas into behaviors teams can adopt weekly. It also helps avoid two common traps: treating reliability as a separate project, and optimizing for internal comfort over external customer outcomes. A mature reliability culture accepts that failure is normal, but user harm is optional when preparation is strong.</p>
+            <ul>
+              <li><b>Reliability Must Be Measured From the User’s Perspective</b> — Internal health checks can all look green while users still face broken login flows, spinning checkouts, or delayed notifications. Teams should define SLIs that capture real customer journeys, such as successful sign-in rate, checkout completion latency, and crash-free sessions. If a metric does not represent user value, it is an engineering vanity number.</li>
+              <li><b>Alerts Should Represent Pain, Not Noise</b> — Paging engineers for every anomaly creates alert fatigue, slower response, and distrust in monitoring itself. High-quality alerts represent meaningful user impact, rapid error-budget burn, or imminent risk. Everything else belongs in dashboards, tickets, or trend reviews. Precision in alerting protects focus during real incidents.</li>
+              <li><b>Error Budgets Protect Innovation</b> — Error budgets are not anti-velocity. They are the mechanism that balances speed and stability. When the budget is healthy, teams can ship confidently. When it is consumed too quickly, the signal is to pause, harden, and pay down reliability debt. This creates objective release conversations instead of emotional debates.</li>
+              <li><b>Automate Repetition, Not Intelligence</b> — Automation should remove repetitive toil such as log triage, known remediation scripts, standard rollback triggers, and routine diagnostics. But automation should not replace judgment where context matters. The goal is to free engineers for system thinking, architecture improvements, and incident leadership.</li>
+              <li><b>Observability Is Understanding, Not Logging</b> — Collecting logs, metrics, and traces is only the first step. Observability means being able to answer why a service degraded, which dependency caused the blast radius, and how quickly user impact can be contained. Teams need thoughtful instrumentation tied to hypotheses, not data exhaust with no ownership.</li>
+              <li><b>Failures Are Data</b> — Every outage, regression, and near miss is an opportunity to improve architecture, process, and communication. Blameless postmortems should document timeline, detection gaps, decision points, and systemic fixes. The best teams turn incidents into institutional memory rather than private stress.</li>
+              <li><b>The Mobile App Is a Production System</b> — Mobile reliability includes device diversity, offline states, app-store rollout lag, and client-side crashes that backend dashboards may miss. Mobile apps are not just thin clients. They are production workloads with their own SLOs, telemetry, failure modes, and recovery strategies.</li>
+            </ul>
+            <p>To keep this philosophy alive, teams should institutionalize lightweight weekly reliability reviews. These reviews are not blame meetings; they are alignment forums where engineering, product, and support inspect error-budget trend lines, recurring ticket themes, and deployment risk for upcoming launches. The outcome should be a small, prioritized reliability backlog with clear ownership and realistic timelines. Over time, this cadence prevents reliability debt from accumulating silently and creates shared language around resilience trade-offs. It also strengthens onboarding by teaching new engineers how the organization defines good operational judgment.</p>
+            <p>When these principles are practiced together, reliability shifts from reactive firefighting to proactive engineering. Teams begin to detect weak signals early, prioritize work that reduces user pain, and ship features with stronger confidence. Most importantly, they build trust: trust from customers that the product will be there when needed, and trust within engineering that operations can scale without burnout. Closing thought: reliability is not perfection. It is disciplined learning, transparent trade-offs, and consistent execution in service of users, every single day, across teams and modern platforms.</p>
+          </div>
       </section>
-
-      <section id="philosophy" class="two-col">
+      
+	<section id="architecture">
+          <h2>Architecture & Thinking</h2>
+          <div class="panel">
+          <div>
+            <ul>
+              <li><b>How I Design Mobile Reliability</b><p>I design mobile reliability by starting from critical user journeys and mapping every dependency that can break those journeys under real-world conditions. The architecture begins with clear SLO definitions for startup time, API success, crash-free sessions, and checkout completion latency. I classify dependencies into controllable and uncontrollable domains, then build degradation paths for each category. For example, if recommendation services fail, browsing still works; if payment tokens expire, safe retries and fallback flows preserve conversion intent. I also model device realities such as low-memory kills, intermittent network quality, and OS update fragmentation. Reliability design includes telemetry contracts, release gates, and rollback controls from day one instead of adding them after launch. Finally, I align product, engineering, and operations on shared error-budget policy so launch decisions are objective and tied to user impact. This approach makes reliability predictable, measurable, and scalable as features and traffic grow across changing business cycles and seasonal demand surges.</p></li>
+              <li><b>Mobile Observability Architecture</b><p>My mobile observability architecture is built to explain behavior, not just collect events. I instrument client applications with structured logs, distributed trace correlation IDs, performance spans, and custom events that represent product milestones like authentication, cart add, checkout initiation, and payment completion. On the backend, I align service telemetry with the same journey IDs to connect client symptoms with server causes quickly. Dashboards are layered: executive reliability outcomes, operational service health, and deep-diagnostic views for on-call engineers. I use sampling and aggregation policies that preserve high-value signals while controlling noise and cost. Alerting is tied to SLO burn rates and business-critical funnels, not raw infrastructure spikes. During incidents, observability supports fast triage by highlighting where failures started, how blast radius expanded, and which user segments were affected most. This architecture turns telemetry into decision support and shortens the path from symptom to action during both planned events and high-stress outages.</p></li>
+              <li><b>Alert Design Strategy</b><p>My alert design strategy centers on urgency, ownership, and actionability. Each alert must answer three questions immediately: who is impacted, what should the responder do first, and how much time is available before user harm increases. I separate page-worthy conditions from informational anomalies using severity tiers aligned with SLOs and error-budget burn rates. Alerts include runbook links, diagnostic context, recent deploy metadata, and rollback instructions so responders are not forced to gather basics during pressure moments. I also enforce deduplication and suppression logic to prevent alert storms when one upstream dependency fails. Every alert is assigned to a clear owner team with escalation policy and communication template for stakeholders. After incidents, I review false positives, missed detections, and time-to-acknowledge trends to refine thresholds continuously. The outcome is a high-signal alerting system that protects engineer attention and improves incident response speed and quality across distributed teams and time zones during sustained operational pressure.</p></li>
+              <li><b>Incident Response Playbook</b><p>My incident response playbook is designed to reduce chaos through structure and shared language. The process starts with rapid triage, impact assessment, and severity declaration based on user-facing symptoms rather than internal assumptions. Roles are assigned quickly: incident commander, communications lead, and technical drivers for each affected domain. I use a consistent timeline discipline that records hypotheses, actions taken, decision rationale, and outcome checkpoints in real time. This avoids duplicated effort and creates accurate post-incident learning. Mitigation prioritizes user impact reduction first—traffic shaping, feature flag disablement, rollback, or dependency isolation—before deep root-cause analysis. Communication cadence is predefined so support teams, leadership, and customer-facing functions receive clear status updates without interrupting responders. Once stable, we run a blameless postmortem focused on systemic improvements, not individual mistakes. The playbook transforms incident handling from heroic improvisation into repeatable operational excellence and helps teams recover faster with lower stress while preserving customer trust during prolonged incident recovery cycles.</p></li>
+              <li><b>Release Safety Strategy</b><p>My release safety strategy treats deployment as a controlled experiment with guardrails, not a one-way event. Every change is evaluated for blast radius, rollback complexity, and dependency sensitivity before approval. I use progressive delivery patterns such as canary, phased rollout, and feature flags to validate behavior on limited traffic before broad exposure. Pre-release checks include automated tests, contract validation, performance baselines, and reliability gate metrics tied to key user journeys. During rollout, real-time dashboards track latency, error rates, crash trends, and funnel conversion deviations against expected bounds. If early signals degrade, automated or operator-initiated rollback executes immediately with predefined criteria. I also schedule high-risk releases with heightened monitoring windows and cross-team support readiness. Post-release, I review outcome data to improve test coverage, thresholds, and release checklists for future cycles. This strategy enables frequent delivery while preserving reliability, user trust, and operational confidence even when release cadence and platform complexity increase.</p></li>
+            </ul>
+          </div>
+          </div>
+        </section>
+      
+      <section id="about" class="two-col">
         <div>
-          <h2>Reliability Philosophy</h2>
+          <h2>About SRE Academy</h2>
           <div class="panel">
             <p>
-              Reliability is not a tool purchase. It is a team habit built through clear service-level objectives, operational discipline, and continuous learning.
+              SRE Academy is an educational platform dedicated to building practical reliability skills that engineers can confidently apply in real production environments. Instead of focusing only on theory, the platform emphasizes hands-on understanding of how modern systems behave under real traffic, failures, and scale. 
             </p>
-            <ul>
-              <li>Measure health from user experience, not only infrastructure signals.</li>
-              <li>Use playbooks and progressive delivery to reduce incident blast radius.</li>
-              <li>Close every incident with blameless postmortems and systemic fixes.</li>
-            </ul>
+            <p>
+            Our mission is to bridge the gap between learning concepts and operating reliable services.
+            </p>
           </div>
         </div>
         <div id="feedback">
@@ -333,25 +357,22 @@
             <div class="profile">
               <img src="assets/images/profile.jpg" alt="Anantharaman Durairaju" />
               <div>
-                <strong>Anantharaman Durairaju</strong><br />
-                Senior Software Engineer | SRE | Cloud Reliability
+                <h3>Anantharaman Durairaju</h3>
+                MacysTech | Apple | Infosys | Cognizant
               </div>
             </div>
-            <p>
-              20+ years of experience building scalable, secure, and highly reliable cloud-native systems across retail, enterprise, and mobile platforms.
-            </p>
-            <div class="chip-grid">
-              <a class="chip" href="https://www.linkedin.com/in/anantharaman-durairaju-87467045/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a class="chip" href="mailto:ananthusworld@gmail.com">Email</a>
-              <a class="chip" href="https://github.com/ananthusworld" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a class="chip" href="assets/docs/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <p>Over two decades of hands-on experience delivering scalable, secure, and resilient cloud-native architectures powering retail, enterprise, and mobile digital products.</p>
+            <div style="display:flex; justify-content:center; gap:28px;">
+              <a href="https://www.linkedin.com/in/anantharaman-durairaju-87467045/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="mailto:ananthusworld@gmail.com">Email</a>
+              <a href="https://github.com/ananthusworld" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer>© 2026 Anantharaman Durairaju — Cumming, GA, USA</footer>
+    <footer>© 2026 SRE Academy | Learn Site Reliability Engineering</footer>
 
     <script>
       const navToggle = document.getElementById("navToggle");
